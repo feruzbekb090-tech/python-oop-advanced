@@ -1,54 +1,25 @@
-# Class: attributes (property), method
-# Object: attributes (property), method
+# methods: class, object, static
 
-# attribute: class and object
-
-class Car:
-    def __init__(self, name):
-        self.name = name
-
-    def __str__(self):
-        return self.name
-
-    def __repr__(self):
-        return f"Car(name='{self.name}')"
+from hashlib import sha256
 
 
-class Person:
-    persons = []
+class User:
 
-    def __init__(self, name, age):
-        self.name = name
-        self.age  = age
-        self.cars = []
+    def __init__(self, email, password):
+        if self.is_valid_email(email):
+            self.email = email
+            self.hash_password = self.hash_password(password)
+        else:
+            raise ValueError('email xato')
 
-        Person.persons.append(self)
+    @staticmethod
+    def is_valid_email(email):
+        return '@' in email
 
-    def add_car(self, car):
-        self.cars.append(car)
+    @staticmethod
+    def hash_password(password):
+        return sha256(password.encode()).hexdigest()
 
-    def __str__(self):
-        return self.name
 
-    def __repr__(self):
-        return f"Person(name='{self.name}', age={self.age})"
+user = User('ali@gamil.com', '123')
 
-c01 = Car('BMW')
-c02 = Car('NEXIA')
-c03 = Car('Lacetti')
-
-p01 = Person('Ali', 17)
-p01.add_car(c01)
-p01.add_car(c03)
-
-p02 = Person('Vali', 13)
-p02.add_car(c02)
-
-p03 = Person('Sami', 13)
-p04 = Person('Gani', 13)
-p05 = Person('Bob', 13)
-
-print(p01.cars)
-print(c01)
-
-print(p01.persons)
