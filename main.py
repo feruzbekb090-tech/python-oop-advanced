@@ -51,3 +51,4 @@ p05 = Person('Bob', 13)
 print(p01.cars)
 print(c01)
 
+print(p01.persons)
